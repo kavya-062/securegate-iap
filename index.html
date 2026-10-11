@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SecureGate | Identity Access</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#0b1020;color:#edf2ff}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 7%;border-bottom:1px solid #29324a}
+.logo{font-size:23px;font-weight:bold;color:#8bb8ff}
+.status{font-size:12px;color:#f7c873;background:#302719;padding:9px 13px;border-radius:20px}
+main{max-width:1100px;margin:45px auto;padding:0 22px}
+h1{font-size:clamp(30px,5vw,48px);margin-bottom:12px}
+p{color:#aebbd3;line-height:1.7}
+.hero{padding:25px 0 30px}
+.hero span{color:#79aaff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin:28px 0}
+.card{background:#141c30;border:1px solid #2a3651;border-radius:15px;padding:23px}
+.card h3{margin-top:0}
+.number{font-size:27px;font-weight:bold;margin:15px 0;color:#9bc0ff}
+.tag{display:inline-block;padding:6px 10px;border-radius:8px;background:#202d45;color:#b8d4ff;font-size:12px}
+button{border:0;border-radius:9px;background:#75a8ff;color:#071226;font-weight:bold;padding:12px 18px;cursor:pointer}
+button:hover{background:#a3c5ff}
+input{width:100%;margin:10px 0;padding:12px;border:1px solid #34425e;border-radius:8px;background:#0b1020;color:white}
+.result{margin-top:15px;padding:13px;border-radius:8px;display:none;line-height:1.6}
+footer{text-align:center;color:#7e8ba6;padding:25px;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">◈ SecureGate</div>
+  <div class="status">DEMO MODE · IAP NOT CONNECTED</div>
+</header>
+<main>
+  <section class="hero">
+    <span>IDENTITY-AWARE ACCESS CONTROL</span>
+    <h1>Security starts with <span>identity.</span></h1>
+    <p>A simple dashboard demonstrating how identity verification and access permissions can protect internal web applications.</p>
+    <span class="tag">Google Cloud IAP + IAM concept</span>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h3>Security status</h3>
+      <div class="number">Demo</div>
+      <p>Real IAP protection has not been configured yet.</p>
+    </div>
+    <div class="card">
+      <h3>Identity verification</h3>
+      <div class="number">Step 01</div>
+      <p>IAP can verify a user's identity before allowing access to a protected application.</p>
+    </div>
+    <div class="card">
+      <h3>Access permissions</h3>
+      <div class="number">Step 02</div>
+      <p>IAM permissions determine which users are allowed to access the application.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Access demonstration</h2>
+    <p>Enter a name to demonstrate the interface. This is a local simulation, not real authentication.</p>
+    <label for="username">Demo username</label>
+    <input id="username" placeholder="Enter any name">
+    <button onclick="demoAccess()">Try demo access</button>
+    <div id="result" class="result" role="status"></div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h3>CampusPortal</h3>
+      <p>Example internal application for student and staff services.</p>
+      <span class="tag">Protected app concept</span>
+    </div>
+    <div class="card">
+      <h3>How access works</h3>
+      <p>1. User opens the app.</p>
+      <p>2. IAP verifies identity.</p>
+      <p>3. IAM permissions are checked.</p>
+      <p>4. Access is allowed or denied.</p>
+    </div>
+  </section>
+</main>
+<footer>SecureGate · Identity-Aware Proxy Project · Educational Demonstration</footer>
+<script>
+function demoAccess(){
+  const name=document.getElementById('username').value.trim();
+  const result=document.getElementById('result');
+  result.style.display='block';
+  result.style.background='#302719';
+  result.style.color='#f7d99a';
+  result.textContent=name
+    ? 'Demo only: '+name+' has not been authenticated. Real access decisions require Google Cloud IAP and IAM.'
+    : 'Please enter a demo username.';
+}
+</script>
+</body>
+</html>

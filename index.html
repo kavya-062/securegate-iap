@@ -59,11 +59,16 @@ footer{text-align:center;color:#7e8ba6;padding:25px;font-size:13px}
   </section>
 
   <section class="card">
-    <h2>Access demonstration</h2>
-    <p>Enter a name to demonstrate the interface. This is a local simulation, not real authentication.</p>
-    <label for="username">Demo username</label>
-    <input id="username" placeholder="Enter any name">
-    <button onclick="demoAccess()">Try demo access</button>
+    <h2>Access Control Test</h2>
+    <p>Demonstration only — this does not authenticate real users.</p>
+    <label for="username">Username</label>
+    <input id="username" placeholder="Enter username">
+    <label for="role">Demo access role</label>
+    <select id="role" style="width:100%;padding:12px;margin:10px 0;background:#0b1020;color:white;border:1px solid #34425e;border-radius:8px">
+      <option value="authorized">Authorized user</option>
+      <option value="unauthorized">Unauthorized user</option>
+    </select>
+    <button onclick="testAccess()">Check Access</button>
     <div id="result" class="result" role="status"></div>
   </section>
 
@@ -84,15 +89,20 @@ footer{text-align:center;color:#7e8ba6;padding:25px;font-size:13px}
 </main>
 <footer>SecureGate · Identity-Aware Proxy Project · Educational Demonstration</footer>
 <script>
-function demoAccess(){
+function testAccess(){
   const name=document.getElementById('username').value.trim();
+  const role=document.getElementById('role').value;
   const result=document.getElementById('result');
   result.style.display='block';
-  result.style.background='#302719';
-  result.style.color='#f7d99a';
-  result.textContent=name
-    ? 'Demo only: '+name+' has not been authenticated. Real access decisions require Google Cloud IAP and IAM.'
-    : 'Please enter a demo username.';
+  if (role === 'authorized') {
+    result.style.background='#123a2b';
+    result.style.color='#86efac';
+    result.textContent='ALLOW — '+name+' is authorized in this demo.';
+  } else {
+    result.style.background='#431d27';
+    result.style.color='#fda4af';
+    result.textContent='DENY — '+name+' is unauthorized in this demo.';
+  }
 }
 </script>
 </body>
